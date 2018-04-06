@@ -1,15 +1,18 @@
 //  @flow
 import React from 'react';
 import { Text } from 'react-native-elements';
-import Container from './Container';
+import Container from '../../common/Container';
 
-import { timeDifferenceForDate } from '../../utils/fns';
+import { timeDifferenceForDate } from '../../../utils/fns';
 
 type Props = {
-  voteCount: number,
+  voteCount: ?number,
   author: ?string,
   date: Date,
 };
+
+const getVoteMsg = (count: number): string =>
+  count && count > 1 ? `${count} votes` : `${count} vote`;
 
 const LinkDescription = ({ voteCount, author, date }: Props) => (
   <Container
@@ -17,7 +20,7 @@ const LinkDescription = ({ voteCount, author, date }: Props) => (
     direction="row"
     style={{ marginLeft: 10, height: 30 }}
   >
-    <Text>{voteCount} votes | </Text>
+    <Text>{getVoteMsg(voteCount || 0)} | </Text>
     {author && <Text>by {author} | </Text>}
     <Text>{timeDifferenceForDate(date)}</Text>
   </Container>

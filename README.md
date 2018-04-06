@@ -15,3 +15,13 @@
 ### Pre-commits
   *It runs prettier, flow, commit-lint and eslint on every commit. This guarantees code quality*
 
+
+
+![GitHub Logo](/docs/linkList.png)
+
+**TODO:**
+- [ ] Create login.
+- [ ] Create example of how to create refetchContainer with pagination and refresh.
+- [ ] Create example of adding, deleting and updating items mutation.
+- [ ] Create example of paginationContainer with pagination and refresh.
+- [ ] Replace graphcool for a complete graphql + relay server.

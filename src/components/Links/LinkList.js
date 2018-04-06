@@ -3,9 +3,8 @@
 import * as React from 'react';
 import { graphql, createRefetchContainer } from 'react-relay';
 import { ScrollView } from 'react-native';
-import { ListItem } from 'react-native-elements';
 
-import LinkDescription from '../common/LinkDescription';
+import Link from './components/Link';
 import createQueryRenderer from '../../utils/createQueryRenderer';
 
 class LinkList extends React.PureComponent<*> {
@@ -14,24 +13,7 @@ class LinkList extends React.PureComponent<*> {
     return (
       <ScrollView>
         {viewer.allLinks.edges.map(({ node }, index) => (
-          <ListItem
-            key={node.id}
-            title={`${index + 1} - ${node.url}`}
-            titleStyle={{ fontWeight: '900', color: '#666' }}
-            subtitle={
-              <LinkDescription
-                voteCount={node.votes.count}
-                author={node.postedBy && node.postedBy.name}
-                date={node.createdAt}
-              />
-            }
-            rightIcon={{
-              name: 'caret-up',
-              type: 'font-awesome',
-              color: 'black',
-              style: { marginRight: 20 },
-            }}
-          />
+          <Link key={index} index={index} link={node} />
         ))}
       </ScrollView>
     );
@@ -53,17 +35,7 @@ const LinkRefetchContainer = createRefetchContainer(
         allLinks(first: 10) {
           edges {
             node {
-              id
-              description
-              url
-              createdAt
-              votes {
-                count
-              }
-              postedBy {
-                id
-                name
-              }
+              ...Link_link
             }
           }
           pageInfo {

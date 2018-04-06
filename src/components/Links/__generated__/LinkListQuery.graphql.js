@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 86bad120160c5d80ad537e47e20b373a
+ * @relayHash c4c900da68c3ba51fd4d65ffdef50715
  */
 
 /* eslint-disable */
@@ -33,23 +33,28 @@ fragment LinkList_viewer_nvrZx on Viewer {
   allLinks(first: 10) {
     edges {
       node {
+        ...Link_link
         id
-        description
-        url
-        createdAt
-        votes {
-          count
-        }
-        postedBy {
-          id
-          name
-        }
       }
     }
     pageInfo {
       hasNextPage
       endCursor
     }
+  }
+}
+
+fragment Link_link on Link {
+  id
+  description
+  url
+  createdAt
+  votes {
+    count
+  }
+  postedBy {
+    id
+    name
   }
 }
 */
@@ -100,7 +105,7 @@ const node /*: ConcreteRequest */ = (function() {
     name: 'LinkListQuery',
     id: null,
     text:
-      'query LinkListQuery {\n  viewer {\n    ...LinkList_viewer_nvrZx\n    id\n  }\n}\n\nfragment LinkList_viewer_nvrZx on Viewer {\n  allLinks(first: 10) {\n    edges {\n      node {\n        id\n        description\n        url\n        createdAt\n        votes {\n          count\n        }\n        postedBy {\n          id\n          name\n        }\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n',
+      'query LinkListQuery {\n  viewer {\n    ...LinkList_viewer_nvrZx\n    id\n  }\n}\n\nfragment LinkList_viewer_nvrZx on Viewer {\n  allLinks(first: 10) {\n    edges {\n      node {\n        ...Link_link\n        id\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n  createdAt\n  votes {\n    count\n  }\n  postedBy {\n    id\n    name\n  }\n}\n',
     metadata: {},
     fragment: {
       kind: 'Fragment',

@@ -1,7 +1,8 @@
 //  @flow
 
 import React, { Component } from 'react';
-import { YellowBox, View } from 'react-native';
+import { YellowBox, View, StatusBar } from 'react-native';
+import { Header } from 'react-native-elements';
 
 import LinkList from './components/Links/LinkList';
 
@@ -15,7 +16,15 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={{ flex: 1, marginTop: 30 }}>
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="#fe6501" barStyle="light-content" />
+        <Header
+          backgroundColor="#fe6501"
+          centerComponent={{
+            text: 'HACKER NEWS',
+            style: { color: 'white', fontWeight: 'bold' },
+          }}
+        />
         <LinkList />
       </View>
     );
