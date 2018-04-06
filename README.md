@@ -12,14 +12,14 @@
 
 
 
-TO INSTALL:
+### TO INSTALL:
+
 *New to react native? follow this https://facebook.github.io/react-native/docs/getting-started.html*
 
-**yarn install**
 
-**yarn relay**
-
-**react-native run-ios** |  **react-native run-android**
+1. yarn install
+2. yarn relay
+3. react-native run-ios |  react-native run-android
  
 
 
