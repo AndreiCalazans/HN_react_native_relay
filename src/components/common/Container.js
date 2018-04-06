@@ -13,7 +13,7 @@ type Justify =
 type Direction = 'row' | 'column';
 
 type Props = {
-  children: React.Element<any>,
+  children: React.Node,
   justify: Justify,
   align: Align,
   direction: Direction,
@@ -38,9 +38,9 @@ Container.defaultProps = {
   justify: 'center',
   align: 'center',
   direction: 'column',
-}
+};
 
-const getFlex = (flex) => flex ? { flex } : {};
+const getFlex = flex => (flex ? { flex } : {});
 
 const styles = {
   view: (justify, align, direction, flex) => ({

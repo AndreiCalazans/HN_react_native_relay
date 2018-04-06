@@ -13,6 +13,7 @@
 .*/node_modules/.*/node_modules/fbjs/.*
 .*/node_modules/babel-plugin-relay/lib/.*
 .*/node_modules/relay-runtime/lib/.*
+.*/node_modules/relay-compiler/lib/.*
 
 ; Ignore duplicate module providers
 ; For RN Apps installed via npm, "Libraries" folder is inside
