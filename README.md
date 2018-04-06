@@ -34,7 +34,9 @@
 
 ### Contribute
 *Please feel free to contribute, below are the things which are waiting to be completed.*
+
 **TODO:**
+
 - [ ] Create login.
 - [ ] Create example of how to create refetchContainer with pagination and refresh.
 - [ ] Create example of adding, deleting and updating items mutation.
