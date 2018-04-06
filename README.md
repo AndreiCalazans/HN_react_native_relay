@@ -1,6 +1,6 @@
 
 # Hackernews React Native with Relay example.
-*The objective of this app is to show how to set up relay modern with React Native. This is a very opionated repo since it comes with full configuration for flow and eslint. Enjoy!*
+*The objective of this app is to show how to set up relay modern with React Native and be a study reference for those interested in using Relay. This is a very opionated repo since it comes with full configuration for flow and eslint. Enjoy!*
 
 
 ### Stack
@@ -31,9 +31,13 @@
 
 <img src="/docs/linkList.png" width="300"/>
 
+
+### Contribute
+*Please feel free to contribute, below are the things which are waiting to be completed.*
 **TODO:**
 - [ ] Create login.
 - [ ] Create example of how to create refetchContainer with pagination and refresh.
 - [ ] Create example of adding, deleting and updating items mutation.
 - [ ] Create example of paginationContainer with pagination and refresh.
+- [ ] Write tests using Jest.
 - [ ] Replace graphcool for a complete graphql + relay server.
