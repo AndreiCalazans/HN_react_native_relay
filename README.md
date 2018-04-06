@@ -12,6 +12,17 @@
 
 
 
+TO INSTALL:
+*New to react native? follow this https://facebook.github.io/react-native/docs/getting-started.html*
+
+**yarn install**
+
+**yarn relay**
+
+**react-native run-ios** |  **react-native run-android**
+ 
+
+
 ### Pre-commits
   *It runs prettier, flow, commit-lint and eslint on every commit. This guarantees code quality*
 
