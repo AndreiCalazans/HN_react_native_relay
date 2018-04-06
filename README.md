@@ -17,7 +17,7 @@
 
 
 
-![GitHub Logo](/docs/linkList.png)
+![GitHub Logo](/docs/linkList.png = 300x)
 
 **TODO:**
 - [ ] Create login.
