@@ -1,7 +1,8 @@
 //  @flow
 
 import React from 'react';
-import { ListItem } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
+import { ListItem, Icon } from 'react-native-elements';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import type { Link_link } from './__generated__/Link_link.graphql';
@@ -10,9 +11,20 @@ import LinkDescription from './LinkDescription';
 type Props = {
   index: number,
   link: Link_link,
+  handleVote: string => any,
 };
 
-const Links = ({ index, link: { url, votes, postedBy, createdAt } }: Props) => (
+const VoteIcon = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress} style={{ marginRight: 20 }}>
+    <Icon name="caret-up" type="font-awesome" color="black" />
+  </TouchableOpacity>
+);
+
+const Links = ({
+  index,
+  handleVote,
+  link: { url, id, votes, postedBy, createdAt },
+}: Props) => (
   <ListItem
     title={`${index + 1} - ${url}`}
     titleStyle={{ fontWeight: '900', color: '#666' }}
@@ -23,12 +35,7 @@ const Links = ({ index, link: { url, votes, postedBy, createdAt } }: Props) => (
         date={createdAt}
       />
     }
-    rightIcon={{
-      name: 'caret-up',
-      type: 'font-awesome',
-      color: 'black',
-      style: { marginRight: 20 },
-    }}
+    rightIcon={<VoteIcon onPress={() => handleVote(id)} />}
   />
 );
 

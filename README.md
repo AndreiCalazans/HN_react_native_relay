@@ -22,6 +22,7 @@
 **TODO:**
 - [ ] Create login.
 - [x] Create example of how to create refetchContainer with pagination.
+- [x] Vote mutation using optimistic updater.
 - [ ] Create example of adding, deleting and updating items mutation.
 - [ ] Create example of paginationContainer with pagination and refresh.
 - [ ] Replace graphcool for a complete graphql + relay server.

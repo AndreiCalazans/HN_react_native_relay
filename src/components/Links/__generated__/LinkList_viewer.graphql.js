@@ -11,6 +11,10 @@ type Link_link$ref = any;
 import type { FragmentReference } from 'relay-runtime';
 declare export opaque type LinkList_viewer$ref: FragmentReference;
 export type LinkList_viewer = {|
+  +user: ?{|
+    +name: string,
+    +id: string,
+  |},
   +allLinks: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -38,6 +42,31 @@ const node /*: ConcreteFragment */ = {
     },
   ],
   selections: [
+    {
+      kind: 'LinkedField',
+      alias: null,
+      name: 'user',
+      storageKey: null,
+      args: null,
+      concreteType: 'User',
+      plural: false,
+      selections: [
+        {
+          kind: 'ScalarField',
+          alias: null,
+          name: 'name',
+          args: null,
+          storageKey: null,
+        },
+        {
+          kind: 'ScalarField',
+          alias: null,
+          name: 'id',
+          args: null,
+          storageKey: null,
+        },
+      ],
+    },
     {
       kind: 'LinkedField',
       alias: null,
@@ -110,5 +139,5 @@ const node /*: ConcreteFragment */ = {
     },
   ],
 };
-(node: any).hash = '82213f8c0150627df91d489283819cb1';
+(node: any).hash = 'c05c818b6db4dddbc2c690ff4802fa14';
 module.exports = node;

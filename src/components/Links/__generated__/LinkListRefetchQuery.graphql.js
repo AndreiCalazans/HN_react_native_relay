@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ce1b43311437d3450f63338758f78029
+ * @relayHash da8d0de6ef1633a5b5b60801489fee0f
  */
 
 /* eslint-disable */
@@ -28,6 +28,10 @@ query LinkListRefetchQuery(
 }
 
 fragment LinkList_viewer_3ASum4 on Viewer {
+  user {
+    name
+    id
+  }
   allLinks(first: $first) {
     edges {
       node {
@@ -69,6 +73,13 @@ const node /*: ConcreteRequest */ = (function() {
     v1 = {
       kind: 'ScalarField',
       alias: null,
+      name: 'name',
+      args: null,
+      storageKey: null,
+    },
+    v2 = {
+      kind: 'ScalarField',
+      alias: null,
       name: 'id',
       args: null,
       storageKey: null,
@@ -79,7 +90,7 @@ const node /*: ConcreteRequest */ = (function() {
     name: 'LinkListRefetchQuery',
     id: null,
     text:
-      'query LinkListRefetchQuery(\n  $first: Int\n) {\n  viewer {\n    ...LinkList_viewer_3ASum4\n    id\n  }\n}\n\nfragment LinkList_viewer_3ASum4 on Viewer {\n  allLinks(first: $first) {\n    edges {\n      node {\n        ...Link_link\n        id\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n  createdAt\n  votes {\n    count\n  }\n  postedBy {\n    id\n    name\n  }\n}\n',
+      'query LinkListRefetchQuery(\n  $first: Int\n) {\n  viewer {\n    ...LinkList_viewer_3ASum4\n    id\n  }\n}\n\nfragment LinkList_viewer_3ASum4 on Viewer {\n  user {\n    name\n    id\n  }\n  allLinks(first: $first) {\n    edges {\n      node {\n        ...Link_link\n        id\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n  createdAt\n  votes {\n    count\n  }\n  postedBy {\n    id\n    name\n  }\n}\n',
     metadata: {},
     fragment: {
       kind: 'Fragment',
@@ -130,6 +141,16 @@ const node /*: ConcreteRequest */ = (function() {
             {
               kind: 'LinkedField',
               alias: null,
+              name: 'user',
+              storageKey: null,
+              args: null,
+              concreteType: 'User',
+              plural: false,
+              selections: [v1, v2],
+            },
+            {
+              kind: 'LinkedField',
+              alias: null,
               name: 'allLinks',
               storageKey: null,
               args: [
@@ -161,7 +182,7 @@ const node /*: ConcreteRequest */ = (function() {
                       concreteType: 'Link',
                       plural: false,
                       selections: [
-                        v1,
+                        v2,
                         {
                           kind: 'ScalarField',
                           alias: null,
@@ -209,16 +230,7 @@ const node /*: ConcreteRequest */ = (function() {
                           args: null,
                           concreteType: 'User',
                           plural: false,
-                          selections: [
-                            v1,
-                            {
-                              kind: 'ScalarField',
-                              alias: null,
-                              name: 'name',
-                              args: null,
-                              storageKey: null,
-                            },
-                          ],
+                          selections: [v2, v1],
                         },
                       ],
                     },
@@ -251,7 +263,7 @@ const node /*: ConcreteRequest */ = (function() {
                 },
               ],
             },
-            v1,
+            v2,
           ],
         },
       ],

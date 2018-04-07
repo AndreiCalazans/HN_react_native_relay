@@ -7,9 +7,23 @@ import { ScrollView, FlatList } from 'react-native';
 import LoadMore from '../common/LoadMore';
 import Link from './components/Link';
 import createQueryRenderer from '../../utils/createQueryRenderer';
+import CreateVoteMutation from './mutations/CreateVoteMutation';
 
 class LinkList extends React.PureComponent<*> {
-  renderItem = ({ item, index }) => <Link index={index} link={item.node} />;
+  handleVote = (id: string) => {
+    const { viewer } = this.props;
+
+    const vars = {
+      linkId: id,
+      userId: viewer.user.id,
+    };
+
+    CreateVoteMutation.commit(vars, () => {}, () => {});
+  };
+
+  renderItem = ({ item, index }) => (
+    <Link handleVote={this.handleVote} index={index} link={item.node} />
+  );
 
   loadMore = () => {
     const { relay, viewer } = this.props;
@@ -47,6 +61,10 @@ const LinkRefetchContainer = createRefetchContainer(
     viewer: graphql`
       fragment LinkList_viewer on Viewer
         @argumentDefinitions(first: { type: Int }) {
+        user {
+          name
+          id
+        }
         allLinks(first: $first) {
           edges {
             node {
