@@ -1,25 +1,43 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { AsyncStorage } from 'react-native';
 
-// import { GC_AUTH_TOKEN } from './constants';
+import { GC_AUTH_TOKEN } from './constants';
 const store = new Store(new RecordSource());
 
-const fetchQuery = (operation, variables) => {
+const fetchQuery = async (operation, variables) => {
+  const token = await AsyncStorage.getItem(GC_AUTH_TOKEN);
+
   return fetch('https://api.graph.cool/relay/v1/cj5zkeqs96v0u01047kxj21wg', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${localStorage.getItem(GC_AUTH_TOKEN)}`,
-      // Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjU2MjY0MDMsImlhdCI6MTUyMzAzNDQwMywicHJvamVjdElkIjoiY2o1emtlcXM5NnYwdTAxMDQ3a3hqMjF3ZyIsInVzZXJJZCI6ImNqNXp0M3h5MDJjYWQwMTk0NjBiYTU5ZzgiLCJhdXRoRGF0YSI6eyJlbWFpbCI6ImFuZHJlaUB0ZXN0LmNvbSJ9LCJtb2RlbE5hbWUiOiJVc2VyIn0.tIzlLHGQHwi2UXtyMVQmPjVYNIGap9yTc3j3r-4TzSQ',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       query: operation.text,
       variables,
     }),
-  }).then(response => {
-    return response.json();
-  });
+  })
+    .then(async response => {
+      const res = await response.json();
+
+      if (res.data) return res;
+
+      // necessary due to limitations of graphcool.
+      return {
+        data: {
+          ...res.data,
+          error: res.errors,
+        },
+      };
+    })
+    .catch(error => {
+      // eslint-disable-next-line
+      console.log('error', error);
+      return error;
+    });
 };
 
 const setupSubscription = (config, variables, cacheConfig, observer) => {

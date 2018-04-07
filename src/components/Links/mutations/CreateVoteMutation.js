@@ -12,8 +12,15 @@ const mutation = graphql`
         id
         link {
           id
+          description
+          url
+          createdAt
           votes {
             count
+          }
+          postedBy {
+            id
+            name
           }
         }
         user {
@@ -36,26 +43,26 @@ function commit(vars: CreateVoteInput, onCompleted: Fn, onError: Fn) {
   return commitMutation(environment, {
     mutation,
     variables,
-    optimisticUpdater: proxyStore => {
-      const link = proxyStore.get(vars.linkId);
-      // to access the objects in the proxyStore use getLinkedRecord
-      // to acess the scalar points use getValue
-      const currentVoteCount = link.getLinkedRecord('votes').getValue('count');
-      const newVoteCount = currentVoteCount + 1;
+    // optimisticUpdater: proxyStore => {
+    //   const link = proxyStore.get(vars.linkId);
+    //   // to access the objects in the proxyStore use getLinkedRecord
+    //   // to acess the scalar points use getValue
+    //   const currentVoteCount = link.getLinkedRecord('votes').getValue('count');
+    //   const newVoteCount = currentVoteCount + 1;
 
-      link.getLinkedRecord('votes').setValue(newVoteCount, 'count');
-    },
-    updater: proxyStore => {
-      // RootFields use getRootField
-      const createVoteField = proxyStore.getRootField('createVote');
-      const newVote = createVoteField.getLinkedRecord('vote');
-      const updatedLink = newVote.getLinkedRecord('link');
-      const newVotes = updatedLink.getLinkedRecord('votes');
-      const newVoteCount = newVotes.getValue('count');
+    //   link.getLinkedRecord('votes').setValue(newVoteCount, 'count');
+    // },
+    // updater: proxyStore => {
+    //   // RootFields use getRootField
+    //   const createVoteField = proxyStore.getRootField('createVote');
+    //   const newVote = createVoteField.getLinkedRecord('vote');
+    //   const updatedLink = newVote.getLinkedRecord('link');
+    //   const newVotes = updatedLink.getLinkedRecord('votes');
+    //   const newVoteCount = newVotes.getValue('count');
 
-      const link = proxyStore.get(vars.linkId);
-      link.getLinkedRecord('votes').setValue(newVoteCount, 'count');
-    },
+    //   const link = proxyStore.get(vars.linkId);
+    //   link.getLinkedRecord('votes').setValue(newVoteCount, 'count');
+    // },
     onCompleted,
     onError,
   });

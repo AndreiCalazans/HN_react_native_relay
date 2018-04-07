@@ -5,6 +5,7 @@ import { graphql, createRefetchContainer } from 'react-relay';
 import { ScrollView, FlatList } from 'react-native';
 
 import LoadMore from '../common/LoadMore';
+import WithHeader from '../common/WithHeader';
 import Link from './components/Link';
 import createQueryRenderer from '../../utils/createQueryRenderer';
 import CreateVoteMutation from './mutations/CreateVoteMutation';
@@ -16,6 +17,7 @@ class LinkList extends React.PureComponent<*> {
     const vars = {
       linkId: id,
       userId: viewer.user.id,
+      clientMutationId: '2',
     };
 
     CreateVoteMutation.commit(vars, () => {}, () => {});
@@ -56,7 +58,7 @@ class LinkList extends React.PureComponent<*> {
 }
 
 const LinkRefetchContainer = createRefetchContainer(
-  LinkList,
+  WithHeader(true)(LinkList),
   {
     viewer: graphql`
       fragment LinkList_viewer on Viewer

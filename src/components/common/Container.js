@@ -18,7 +18,7 @@ type Props = {
   align: Align,
   direction: Direction,
   flex?: number,
-  style?: {},
+  style?: any,
 };
 
 const Container = ({

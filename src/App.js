@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { YellowBox, View, StatusBar } from 'react-native';
-import { Header } from 'react-native-elements';
 
-import LinkList from './components/Links/LinkList';
+import Navigator from './Navigator';
+import { ROUTE_NAMES } from './utils/constants';
 
 YellowBox.ignoreWarnings([
   'Warning: componentWillMount is deprecated',
@@ -13,19 +13,23 @@ YellowBox.ignoreWarnings([
 ]);
 
 type Props = {};
-export default class App extends Component<Props> {
+
+type State = {
+  initialRoute: $Values<typeof ROUTE_NAMES>,
+};
+
+export default class App extends Component<Props, State> {
+  state = {
+    initialRoute: ROUTE_NAMES.LOGIN,
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="#fe6501" barStyle="light-content" />
-        <Header
-          backgroundColor="#fe6501"
-          centerComponent={{
-            text: 'HACKER NEWS',
-            style: { color: 'white', fontWeight: 'bold' },
-          }}
+        <Navigator
+          navigationOptions={{ initialRouteName: this.state.initialRoute }}
         />
-        <LinkList />
       </View>
     );
   }

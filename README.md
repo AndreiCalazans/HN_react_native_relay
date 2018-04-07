@@ -20,9 +20,12 @@
 ![GitHub Logo](/docs/linkList.png = 300x)
 
 **TODO:**
-- [ ] Create login.
-- [x] Create example of how to create refetchContainer with pagination.
-- [x] Vote mutation using optimistic updater.
+- [x] Create login.
+- [ ] Create logout.
+- [x] Create example of how to create refetchContainer with load more.
+- [x] Vote mutation.
 - [ ] Create example of adding, deleting and updating items mutation.
+- [ ] Display list of users using pagination container.
 - [ ] Create example of paginationContainer with pagination and refresh.
+- [ ] Vote subscription.
 - [ ] Replace graphcool for a complete graphql + relay server.

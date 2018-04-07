@@ -6,6 +6,7 @@ import type { GraphQLTaggedNode, Variables } from 'react-relay';
 import { QueryRenderer } from 'react-relay';
 import { Text } from 'react-native-elements';
 
+import Loading from '../components/common/Loading';
 import environment from './Environment';
 
 type Config = {
@@ -41,7 +42,7 @@ export default function createQueryRenderer(
               return <FragmentComponent {...this.props} {...props} />;
             }
 
-            return <Text>Loading...</Text>;
+            return <Loading />;
           }}
         />
       );

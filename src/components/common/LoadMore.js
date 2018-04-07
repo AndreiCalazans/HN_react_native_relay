@@ -11,7 +11,10 @@ type Props = {
 };
 
 const LoadMore = ({ handleLoadMore }: Props) => (
-  <TouchableOpacity onPress={handleLoadMore}>
+  <TouchableOpacity
+    style={{ backgroundColor: 'white' }}
+    onPress={handleLoadMore}
+  >
     <Container direction="row" style={{ height: 60 }}>
       <Text style={{ margin: 10 }}>Load more</Text>
       <Icon type="font-awesome" name="plus" color="black" />

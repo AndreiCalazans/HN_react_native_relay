@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fe947158b331e943019b2d3f9ee850fc
+ * @relayHash c1308cd7af0d52537d8aeffe4861554a
  */
 
 /* eslint-disable */
@@ -30,8 +30,15 @@ export type CreateVoteMutationResponse = {|
       +id: string,
       +link: {|
         +id: string,
+        +description: string,
+        +url: string,
+        +createdAt: any,
         +votes: ?{|
           +count: number,
+        |},
+        +postedBy: ?{|
+          +id: string,
+          +name: string,
         |},
       |},
       +user: {|
@@ -49,8 +56,15 @@ mutation CreateVoteMutation(
       id
       link {
         id
+        description
+        url
+        createdAt
         votes {
           count
+        }
+        postedBy {
+          id
+          name
         }
       }
       user {
@@ -115,6 +129,27 @@ const node /*: ConcreteRequest */ = (function() {
                 selections: [
                   v1,
                   {
+                    kind: 'ScalarField',
+                    alias: null,
+                    name: 'description',
+                    args: null,
+                    storageKey: null,
+                  },
+                  {
+                    kind: 'ScalarField',
+                    alias: null,
+                    name: 'url',
+                    args: null,
+                    storageKey: null,
+                  },
+                  {
+                    kind: 'ScalarField',
+                    alias: null,
+                    name: 'createdAt',
+                    args: null,
+                    storageKey: null,
+                  },
+                  {
                     kind: 'LinkedField',
                     alias: null,
                     name: 'votes',
@@ -127,6 +162,25 @@ const node /*: ConcreteRequest */ = (function() {
                         kind: 'ScalarField',
                         alias: null,
                         name: 'count',
+                        args: null,
+                        storageKey: null,
+                      },
+                    ],
+                  },
+                  {
+                    kind: 'LinkedField',
+                    alias: null,
+                    name: 'postedBy',
+                    storageKey: null,
+                    args: null,
+                    concreteType: 'User',
+                    plural: false,
+                    selections: [
+                      v1,
+                      {
+                        kind: 'ScalarField',
+                        alias: null,
+                        name: 'name',
                         args: null,
                         storageKey: null,
                       },
@@ -155,7 +209,7 @@ const node /*: ConcreteRequest */ = (function() {
     name: 'CreateVoteMutation',
     id: null,
     text:
-      'mutation CreateVoteMutation(\n  $input: CreateVoteInput!\n) {\n  createVote(input: $input) {\n    vote {\n      id\n      link {\n        id\n        votes {\n          count\n        }\n      }\n      user {\n        id\n      }\n    }\n  }\n}\n',
+      'mutation CreateVoteMutation(\n  $input: CreateVoteInput!\n) {\n  createVote(input: $input) {\n    vote {\n      id\n      link {\n        id\n        description\n        url\n        createdAt\n        votes {\n          count\n        }\n        postedBy {\n          id\n          name\n        }\n      }\n      user {\n        id\n      }\n    }\n  }\n}\n',
     metadata: {},
     fragment: {
       kind: 'Fragment',
@@ -173,5 +227,5 @@ const node /*: ConcreteRequest */ = (function() {
     },
   };
 })();
-(node: any).hash = 'bfa4900d93ba84d927c9291c96a44f2f';
+(node: any).hash = '5516e9617bd82e3d5fa0373a850abc90';
 module.exports = node;
