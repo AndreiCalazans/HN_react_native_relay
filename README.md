@@ -19,6 +19,8 @@
 
 ![GitHub Logo](/docs/linkList.png = 300x)
 
+![GitHub Logo](/docs/login.png = 300x)
+
 **TODO:**
 - [x] Create login.
 - [x] Create logout.
@@ -28,4 +30,5 @@
 - [ ] Display list of users using pagination container.
 - [ ] Create example of paginationContainer with pagination and refresh.
 - [ ] Vote subscription.
+- [ ] Write unit tests with Jest.
 - [ ] Replace graphcool for a complete graphql + relay server.
