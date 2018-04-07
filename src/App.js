@@ -6,6 +6,10 @@ import { Header } from 'react-native-elements';
 
 import LinkList from './components/Links/LinkList';
 
+const { installRelayDevTools } = require('relay-devtools');
+
+installRelayDevTools();
+
 YellowBox.ignoreWarnings([
   'Warning: componentWillMount is deprecated',
   'Warning: componentWillReceiveProps is deprecated',
