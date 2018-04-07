@@ -21,7 +21,7 @@
 
 **TODO:**
 - [x] Create login.
-- [ ] Create logout.
+- [x] Create logout.
 - [x] Create example of how to create refetchContainer with load more.
 - [x] Vote mutation.
 - [ ] Create example of adding, deleting and updating items mutation.
