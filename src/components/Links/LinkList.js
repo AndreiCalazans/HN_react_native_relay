@@ -2,19 +2,40 @@
 
 import * as React from 'react';
 import { graphql, createRefetchContainer } from 'react-relay';
-import { ScrollView } from 'react-native';
+import { ScrollView, FlatList } from 'react-native';
 
+import LoadMore from '../common/LoadMore';
 import Link from './components/Link';
 import createQueryRenderer from '../../utils/createQueryRenderer';
 
 class LinkList extends React.PureComponent<*> {
+  renderItem = ({ item, index }) => <Link index={index} link={item.node} />;
+
+  loadMore = () => {
+    const { relay, viewer } = this.props;
+
+    const refetchVariables = fragmentVariables => {
+      const totalToRefetch =
+        viewer.allLinks.edges.length + fragmentVariables.first;
+
+      return {
+        first: totalToRefetch,
+      };
+    };
+
+    relay.refetch(refetchVariables, null);
+  };
+
   render() {
     const { viewer } = this.props;
     return (
       <ScrollView>
-        {viewer.allLinks.edges.map(({ node }, index) => (
-          <Link key={index} index={index} link={node} />
-        ))}
+        <FlatList
+          data={viewer.allLinks.edges}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => String(index)}
+          ListFooterComponent={<LoadMore handleLoadMore={this.loadMore} />}
+        />
       </ScrollView>
     );
   }
@@ -25,14 +46,8 @@ const LinkRefetchContainer = createRefetchContainer(
   {
     viewer: graphql`
       fragment LinkList_viewer on Viewer
-        @argumentDefinitions(
-          first: { type: Int }
-          last: { type: Int }
-          before: { type: String }
-          after: { type: String }
-          search: { type: String }
-        ) {
-        allLinks(first: 10) {
+        @argumentDefinitions(first: { type: Int }) {
+        allLinks(first: $first) {
           edges {
             node {
               ...Link_link
@@ -47,22 +62,9 @@ const LinkRefetchContainer = createRefetchContainer(
     `,
   },
   graphql`
-    query LinkListRefetchQuery(
-      $after: String
-      $before: String
-      $search: String
-      $first: Int
-      $last: Int
-    ) {
+    query LinkListRefetchQuery($first: Int) {
       viewer {
-        ...LinkList_viewer
-          @arguments(
-            first: $first
-            last: $last
-            after: $after
-            before: $before
-            search: $search
-          )
+        ...LinkList_viewer @arguments(first: $first)
       }
     }
   `,
@@ -70,22 +72,9 @@ const LinkRefetchContainer = createRefetchContainer(
 
 export default createQueryRenderer(LinkRefetchContainer, LinkList, {
   query: graphql`
-    query LinkListQuery(
-      $after: String
-      $before: String
-      $search: String
-      $first: Int
-      $last: Int
-    ) {
+    query LinkListQuery($first: Int) {
       viewer {
-        ...LinkList_viewer
-          @arguments(
-            first: $first
-            last: $last
-            after: $after
-            before: $before
-            search: $search
-          )
+        ...LinkList_viewer @arguments(first: $first)
       }
     }
   `,

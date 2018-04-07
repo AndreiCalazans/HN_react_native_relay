@@ -36,42 +36,18 @@ const node /*: ConcreteFragment */ = {
       type: 'Int',
       defaultValue: null,
     },
-    {
-      kind: 'LocalArgument',
-      name: 'last',
-      type: 'Int',
-      defaultValue: null,
-    },
-    {
-      kind: 'LocalArgument',
-      name: 'before',
-      type: 'String',
-      defaultValue: null,
-    },
-    {
-      kind: 'LocalArgument',
-      name: 'after',
-      type: 'String',
-      defaultValue: null,
-    },
-    {
-      kind: 'LocalArgument',
-      name: 'search',
-      type: 'String',
-      defaultValue: null,
-    },
   ],
   selections: [
     {
       kind: 'LinkedField',
       alias: null,
       name: 'allLinks',
-      storageKey: 'allLinks(first:10)',
+      storageKey: null,
       args: [
         {
-          kind: 'Literal',
+          kind: 'Variable',
           name: 'first',
-          value: 10,
+          variableName: 'first',
           type: 'Int',
         },
       ],
@@ -134,5 +110,5 @@ const node /*: ConcreteFragment */ = {
     },
   ],
 };
-(node: any).hash = 'be97ebccd5d4a324cd418b3c86a57887';
+(node: any).hash = '82213f8c0150627df91d489283819cb1';
 module.exports = node;

@@ -21,7 +21,7 @@
 
 **TODO:**
 - [ ] Create login.
-- [ ] Create example of how to create refetchContainer with pagination and refresh.
+- [x] Create example of how to create refetchContainer with pagination.
 - [ ] Create example of adding, deleting and updating items mutation.
 - [ ] Create example of paginationContainer with pagination and refresh.
 - [ ] Replace graphcool for a complete graphql + relay server.

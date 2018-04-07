@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c4c900da68c3ba51fd4d65ffdef50715
+ * @relayHash b99fcb33e28cdc09bfb4bc4dcf589425
  */
 
 /* eslint-disable */
@@ -10,11 +10,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type LinkList_viewer$ref = any;
 export type LinkListQueryVariables = {|
-  after?: ?string,
-  before?: ?string,
-  search?: ?string,
   first?: ?number,
-  last?: ?number,
 |};
 export type LinkListQueryResponse = {|
   +viewer: {|
@@ -22,15 +18,17 @@ export type LinkListQueryResponse = {|
   |},
 |};
 /*
-query LinkListQuery {
+query LinkListQuery(
+  $first: Int
+) {
   viewer {
-    ...LinkList_viewer_nvrZx
+    ...LinkList_viewer_3ASum4
     id
   }
 }
 
-fragment LinkList_viewer_nvrZx on Viewer {
-  allLinks(first: 10) {
+fragment LinkList_viewer_3ASum4 on Viewer {
+  allLinks(first: $first) {
     edges {
       node {
         ...Link_link
@@ -63,31 +61,7 @@ const node /*: ConcreteRequest */ = (function() {
   var v0 = [
       {
         kind: 'LocalArgument',
-        name: 'after',
-        type: 'String',
-        defaultValue: null,
-      },
-      {
-        kind: 'LocalArgument',
-        name: 'before',
-        type: 'String',
-        defaultValue: null,
-      },
-      {
-        kind: 'LocalArgument',
-        name: 'search',
-        type: 'String',
-        defaultValue: null,
-      },
-      {
-        kind: 'LocalArgument',
         name: 'first',
-        type: 'Int',
-        defaultValue: null,
-      },
-      {
-        kind: 'LocalArgument',
-        name: 'last',
         type: 'Int',
         defaultValue: null,
       },
@@ -105,7 +79,7 @@ const node /*: ConcreteRequest */ = (function() {
     name: 'LinkListQuery',
     id: null,
     text:
-      'query LinkListQuery {\n  viewer {\n    ...LinkList_viewer_nvrZx\n    id\n  }\n}\n\nfragment LinkList_viewer_nvrZx on Viewer {\n  allLinks(first: 10) {\n    edges {\n      node {\n        ...Link_link\n        id\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n  createdAt\n  votes {\n    count\n  }\n  postedBy {\n    id\n    name\n  }\n}\n',
+      'query LinkListQuery(\n  $first: Int\n) {\n  viewer {\n    ...LinkList_viewer_3ASum4\n    id\n  }\n}\n\nfragment LinkList_viewer_3ASum4 on Viewer {\n  allLinks(first: $first) {\n    edges {\n      node {\n        ...Link_link\n        id\n      }\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n  createdAt\n  votes {\n    count\n  }\n  postedBy {\n    id\n    name\n  }\n}\n',
     metadata: {},
     fragment: {
       kind: 'Fragment',
@@ -129,32 +103,8 @@ const node /*: ConcreteRequest */ = (function() {
               args: [
                 {
                   kind: 'Variable',
-                  name: 'after',
-                  variableName: 'after',
-                  type: null,
-                },
-                {
-                  kind: 'Variable',
-                  name: 'before',
-                  variableName: 'before',
-                  type: null,
-                },
-                {
-                  kind: 'Variable',
                   name: 'first',
                   variableName: 'first',
-                  type: null,
-                },
-                {
-                  kind: 'Variable',
-                  name: 'last',
-                  variableName: 'last',
-                  type: null,
-                },
-                {
-                  kind: 'Variable',
-                  name: 'search',
-                  variableName: 'search',
                   type: null,
                 },
               ],
@@ -181,12 +131,12 @@ const node /*: ConcreteRequest */ = (function() {
               kind: 'LinkedField',
               alias: null,
               name: 'allLinks',
-              storageKey: 'allLinks(first:10)',
+              storageKey: null,
               args: [
                 {
-                  kind: 'Literal',
+                  kind: 'Variable',
                   name: 'first',
-                  value: 10,
+                  variableName: 'first',
                   type: 'Int',
                 },
               ],
@@ -308,5 +258,5 @@ const node /*: ConcreteRequest */ = (function() {
     },
   };
 })();
-(node: any).hash = 'a03937dcd983140f322f90d23bf90846';
+(node: any).hash = 'a2a78813fb0f1f26da5d3ef033c8b717';
 module.exports = node;
