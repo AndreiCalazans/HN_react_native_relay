@@ -11,6 +11,7 @@
     "prettier": "prettier --write --single-quote true --trailing-comma all --print-width 80",
     "precommit": "yarn check:commit_lazy",
     "commitmsg": "commitlint -e $GIT_PARAMS",
+    "coverage": "node node_modules/jest/bin/jest.js --coverage",
     "prettier:all": "prettier --write --single-quote true --trailing-comma all --print-width 80 --write 'src/**/*.js'",
     "flow": "node_modules/.bin/flow check",
     "flow-typed": "rm -rf flow-typed/npm && node_modules/.bin/flow-typed install",
@@ -66,6 +67,9 @@
     "relay-compiler": "^1.5.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)"
+    ]
   }
 }

@@ -37,8 +37,6 @@
 ### Contribute
 *Please feel free to contribute, below are the things which are waiting to be completed.*
 
-![GitHub Logo](/docs/login.png = 300x)
-
 **TODO:**
 - [x] Create login.
 - [x] Create Sign up.
