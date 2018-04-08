@@ -32,6 +32,7 @@
 
 <img src="/docs/login.png" width="300"/>
 
+<img src="/docs/signup.png" width="300"/>
 
 ### Contribute
 *Please feel free to contribute, below are the things which are waiting to be completed.*
@@ -40,6 +41,7 @@
 
 **TODO:**
 - [x] Create login.
+- [x] Create Sign up.
 - [x] Create logout.
 - [x] Create example of how to create refetchContainer with load more.
 - [x] Vote mutation.

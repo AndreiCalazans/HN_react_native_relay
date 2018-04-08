@@ -50,7 +50,11 @@ class LinkList extends React.PureComponent<*> {
           data={viewer.allLinks.edges}
           renderItem={this.renderItem}
           keyExtractor={(item, index) => String(index)}
-          ListFooterComponent={<LoadMore handleLoadMore={this.loadMore} />}
+          ListFooterComponent={
+            viewer.allLinks.pageInfo.hasNextPage && (
+              <LoadMore handleLoadMore={this.loadMore} />
+            )
+          }
         />
       </ScrollView>
     );

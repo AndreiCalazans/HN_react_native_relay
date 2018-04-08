@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet, AsyncStorage, TouchableOpacity } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
 import { ROUTE_NAMES, GC_AUTH_TOKEN } from '../../utils/constants';
@@ -9,12 +9,15 @@ import Container from '../common/Container';
 import WithHeader from '../common/WithHeader';
 import TextInput from '../common/TextInput';
 import SignMutation from './mutations/SigninMutation';
+import CreateUserMutation from './mutations/CreateUserMutation';
 
 type State = {
   isLoading: boolean,
   email: string,
   password: string,
   errorMsg: ?string,
+  login: boolean,
+  name: string,
 };
 
 type Res = any;
@@ -25,12 +28,19 @@ class Login extends React.PureComponent<any, State> {
     email: '',
     password: '',
     errorMsg: null,
+    login: true,
+    name: '',
   };
 
-  setValue = (field: 'email' | 'password') => (val: string) =>
+  setValue = (field: 'email' | 'password' | 'name') => (val: string) =>
     this.setState({ [field]: val });
 
-  validateInputs = () => this.state.email.length && this.state.password.length;
+  validateInputs = () => {
+    const { email, password, name, login } = this.state;
+    const emailPassComplete = email.length && password.length;
+    if (login) return emailPassComplete;
+    return emailPassComplete && name.length;
+  };
 
   onCompleted = async ({ signinUser }: Res) => {
     if (!signinUser) return this.onError();
@@ -44,7 +54,7 @@ class Login extends React.PureComponent<any, State> {
 
   submit = () => {
     this.setState({ isLoading: true, errorMsg: null });
-    const { email, password } = this.state;
+    const { email, password, login, name } = this.state;
     const vars = {
       clientMutationId: '21',
       email: {
@@ -53,14 +63,32 @@ class Login extends React.PureComponent<any, State> {
       },
     };
 
-    SignMutation.commit(vars, this.onCompleted, this.onError);
+    login
+      ? SignMutation.commit(vars, this.onCompleted, this.onError)
+      : CreateUserMutation.commit(
+          { name, email: vars.email },
+          this.onCompleted,
+          this.onError,
+        );
   };
 
+  toggleLogin = () => this.setState(prevState => ({ login: !prevState.login }));
+
   render() {
-    const { isLoading, email, password, errorMsg } = this.state;
+    const { name, isLoading, email, password, errorMsg, login } = this.state;
     return (
       <Container flex={1} style={styles.container}>
         {errorMsg && <Text style={{ color: 'red' }}>{errorMsg}</Text>}
+
+        {!login && (
+          <TextInput
+            value={name}
+            onChange={this.setValue('name')}
+            style={styles.input}
+            placeholder="name"
+            iconName="user"
+          />
+        )}
         <TextInput
           value={email}
           onChange={this.setValue('email')}
@@ -76,8 +104,13 @@ class Login extends React.PureComponent<any, State> {
           secureTextEntry
           iconName="lock"
         />
+        <TouchableOpacity onPress={this.toggleLogin}>
+          <Text style={{ margin: 20 }}>
+            {login ? 'Need to create an account?' : 'Already have an account ?'}
+          </Text>
+        </TouchableOpacity>
         <Button
-          title="Login"
+          title={login ? 'Login' : 'Sign up'}
           onPress={this.submit}
           disabled={!this.validateInputs()}
           disabledStyle={{ backgroundColor: 'lightgrey' }}
