@@ -9,6 +9,9 @@
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
+; Ignore findup error
+.*/node_modules/findup/.*
+
 ; Ignore unexpected extra "@providesModule"
 .*/node_modules/.*/node_modules/fbjs/.*
 .*/node_modules/babel-plugin-relay/lib/.*
